@@ -15,9 +15,24 @@ const LoginPage = () => {
   useEffect(() => {
     // Check if we're returning from auth with session_id
     const hash = window.location.hash;
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    console.log('Current URL:', window.location.href);
+    console.log('Hash:', hash);
+    console.log('Search params:', window.location.search);
+    
     if (hash.includes('session_id=')) {
-      const urlParams = new URLSearchParams(hash.substring(1));
+      const hashParams = new URLSearchParams(hash.substring(1));
+      const sessionId = hashParams.get('session_id');
+      
+      console.log('Found session_id in hash:', sessionId);
+      
+      if (sessionId) {
+        handleLogin(sessionId);
+      }
+    } else if (urlParams.get('session_id')) {
       const sessionId = urlParams.get('session_id');
+      console.log('Found session_id in query params:', sessionId);
       
       if (sessionId) {
         handleLogin(sessionId);
