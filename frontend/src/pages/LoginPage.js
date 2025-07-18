@@ -35,8 +35,10 @@ const LoginPage = () => {
   };
 
   const handleLoginClick = () => {
-    const currentUrl = window.location.origin + window.location.pathname;
+    const currentUrl = window.location.origin + '/login';
     const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(currentUrl)}`;
+    console.log('Redirecting to:', authUrl);
+    console.log('Current URL:', currentUrl);
     window.location.href = authUrl;
   };
 
